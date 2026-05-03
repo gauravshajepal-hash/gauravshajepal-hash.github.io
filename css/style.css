@@ -1513,6 +1513,15 @@ img {
     transform: translateY(-1px);
 }
 
+.skills-graph-container.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+}
+.publications-list.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
 /* ==================== PUBLICATIONS ==================== */
 .publications-list {
     max-width: 800px;
