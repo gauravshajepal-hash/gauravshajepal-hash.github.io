@@ -6,18 +6,18 @@
 }
 
 :root {
-    --bg-primary: #0a0f1a;
-    --bg-secondary: #0d1526;
-    --bg-alt: #0d1526;
-    --text-primary: #e8eaf0;
-    --text-secondary: #a0a8c0;
-    --text-muted: #606880;
-    --accent-primary: #1e88e5;
-    --accent-secondary: #00bcd4;
-    --accent-gradient: linear-gradient(135deg, #1e88e5 0%, #00bcd4 100%);
-    --card-bg: #111827;
-    --card-border: rgba(30, 136, 229, 0.2);
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --bg-primary: #f0f4fa;
+    --bg-secondary: #e4ecf7;
+    --bg-alt: #e8f0fb;
+    --text-primary: #1a2332;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --accent-primary: #2563eb;
+    --accent-secondary: #0891b2;
+    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+    --card-bg: #ffffff;
+    --card-border: rgba(37, 99, 235, 0.15);
+    --shadow: 0 4px 20px rgba(37, 99, 235, 0.08);
 }
 
 html {
@@ -60,7 +60,7 @@ ul {
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: rgba(10, 15, 26, 0.95);
+    background-color: rgba(240, 244, 250, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--card-border);
     transition: all 0.3s ease;
@@ -193,8 +193,8 @@ ul {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at 80% 20%, rgba(30, 136, 229, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 20% 80%, rgba(0, 188, 212, 0.06) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 80% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(8, 145, 178, 0.04) 0%, transparent 50%);
 }
 
 .hero-content {
@@ -757,7 +757,7 @@ footer {
         flex-direction: column;
         padding: 1rem;
         border-bottom: 1px solid var(--card-border);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
     }
     
     .nav-links.active {
@@ -909,7 +909,7 @@ footer {
 
 .education-card:hover, .skill-category:hover, .publication-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(30, 136, 229, 0.15);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12);
 }
 
 /* Active nav link styling */

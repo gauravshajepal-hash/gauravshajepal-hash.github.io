@@ -137,7 +137,7 @@ style.textContent = `
         align-items: center;
         justify-content: center;
         font-size: 1.2rem;
-        box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         opacity: 0;
         visibility: hidden;
         transform: translateY(20px);
@@ -151,7 +151,7 @@ style.textContent = `
     }
     .back-to-top:hover {
         transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(30, 136, 229, 0.4);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
     }
 `;
 document.head.appendChild(style);
