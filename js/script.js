@@ -167,6 +167,154 @@ function animateCounters() {
 // Initialize counters
 animateCounters();
 
+
+// ==================== SCROLL REVEAL ANIMATIONS ====================
+let revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+// Observe skill bars for scroll-triggered animation
+let skillBarsInitialized = false;
+
+function checkSkillBars() {
+    const skillBars = document.querySelectorAll('.bar-fill');
+    const skillsSection = document.getElementById('skills');
+    
+    if (!skillsSection) return;
+    
+    const rect = skillsSection.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+    
+    if (isVisible && !skillBarsInitialized) {
+        skillBarsInitialized = true;
+        skillBars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            if (width) {
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 100);
+            }
+        });
+    }
+}
+
+// Observe reveal elements
+const revealElements = document.querySelectorAll('.reveal');
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Check skill bars on scroll
+window.addEventListener('scroll', checkSkillBars, { passive: true });
+window.addEventListener('load', checkSkillBars);
+
+// ==================== COUNTER ANIMATIONS ====================
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease out function
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(easeOut * target);
+        
+        element.textContent = current.toLocaleString();
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.textContent = target.toLocaleString();
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
+let countersAnimated = false;
+
+function animateAllCounters() {
+    if (countersAnimated) return;
+    
+    const counters = document.querySelectorAll('[data-target]');
+    const statsSection = document.querySelector('section[id]');
+    
+    let triggerSection = null;
+    document.querySelectorAll('section[id]').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom >= 0) {
+            triggerSection = section;
+        }
+    });
+    
+    if (triggerSection) {
+        const countersInView = document.querySelectorAll('[data-target]');
+        countersInView.forEach(counter => {
+            if (counter.textContent === '0' || counter.textContent === '0') {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const delay = parseInt(counter.dataset.delay) || 0;
+                
+                setTimeout(() => {
+                    animateCounter(counter, target, duration);
+                }, delay);
+            }
+        });
+        countersAnimated = true;
+    }
+}
+
+// Enhanced counter observer
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateAllCounters();
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('section[id]').forEach(section => {
+    counterObserver.observe(section);
+});
+
+// Also trigger on scroll for stats grids
+window.addEventListener('scroll', () => {
+    if (!countersAnimated) {
+        animateAllCounters();
+    }
+}, { passive: true });
+
+// Initialize counters on load
+window.addEventListener('load', () => {
+    setTimeout(animateAllCounters, 300);
+});
+
+// ==================== PROJECT/MOCKUP INTERACTIONS ====================
+const projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        const overlay = card.querySelector('.project-overlay');
+        if (overlay) {
+            overlay.style.opacity = '1';
+        }
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        const overlay = card.querySelector('.project-overlay');
+        if (overlay) {
+            overlay.style.opacity = '0';
+        }
+    });
+});
+
 // Typing Animation
 const typingTexts = [
     'Systems Biology & Production Management',
