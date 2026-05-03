@@ -264,8 +264,21 @@ img {
 
 .btn-secondary:hover {
     border-color: var(--accent-primary);
-    transform: translateY(-2px);
+    color: var(--accent-primary);
+    transform: translateY(-3px);
     box-shadow: var(--shadow);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1.5px solid var(--card-border);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(59, 130, 246, 0.04);
 }
 
 /* ==================== HERO SECTION ==================== */
