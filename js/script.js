@@ -168,18 +168,6 @@ function animateCounters() {
 animateCounters();
 
 
-// ==================== SCROLL REVEAL ANIMATIONS ====================
-let revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-});
-
 // Observe skill bars for scroll-triggered animation
 let skillBarsInitialized = false;
 
@@ -204,10 +192,6 @@ function checkSkillBars() {
         });
     }
 }
-
-// Observe reveal elements
-const revealElements = document.querySelectorAll('.reveal');
-revealElements.forEach(el => revealObserver.observe(el));
 
 // Check skill bars on scroll
 window.addEventListener('scroll', checkSkillBars, { passive: true });
