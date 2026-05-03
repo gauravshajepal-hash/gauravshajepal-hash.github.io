@@ -94,7 +94,7 @@ if (contactForm) {
 }
 
 // Scroll reveal animation with Intersection Observer
-const revealElements = document.querySelectorAll('.timeline-item, .education-card, .skill-category, .publication-item');
+const revealElements = document.querySelectorAll('.timeline-item, .education-card, .skill-category, .publication-item, .project-card');
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
