@@ -323,410 +323,213 @@ typeText();
 
 // ==================== SKILLS NETWORK GRAPH ====================
 function initSkillsGraph() {
-    const canvas = document.getElementById('skillsGraph');
-    if (!canvas) return;
+        const canvas = document.getElementById('skillsGraph');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
     
-    const ctx = canvas.getContext('2d');
-    
-    // High DPI support
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-    canvas.style.width = rect.width + 'px';
-    canvas.style.height = rect.height + 'px';
-    
-    // Skill categories with colors
-    const categories = {
-        operations: { color: '#3b82f6', label: 'Operations' },
-        quality: { color: '#10b981', label: 'Quality' },
-        leadership: { color: '#8b5cf6', label: 'Leadership' },
-        technical: { color: '#f59e0b', label: 'Technical' },
-        research: { color: '#ef4444', label: 'Research' }
-    };
-    
-    // Particle background system
-    const particles = [];
-    const particleCount = 50;
-    
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * rect.width,
-            y: Math.random() * rect.height,
-            radius: Math.random() * 2 + 0.5,
-            vx: (Math.random() - 0.5) * 0.3,
-            vy: (Math.random() - 0.5) * 0.3,
-            alpha: Math.random() * 0.3 + 0.1,
-            category: Object.keys(categories)[Math.floor(Math.random() * Object.keys(categories).length)]
-        });
-    }
-    
-    function updateParticles() {
-        particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            
-            if (p.x < 0 || p.x > rect.width) p.vx *= -1;
-            if (p.y < 0 || p.y > rect.height) p.vy *= -1;
-        });
-    }
-    
-    function drawParticles() {
-        particles.forEach(p => {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            const cat = categories[p.category];
-            ctx.fillStyle = cat.color + Math.floor(p.alpha * 255).toString(16).padStart(2, '0');
-            ctx.fill();
-        });
-    }
-    
-    const tooltip = document.createElement('div');
-    tooltip.className = 'skill-tooltip';
-    canvas.parentElement.appendChild(tooltip);
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    // Skill nodes
-    const nodes = [
-        // Operations
-        { id: 'production', label: 'Production\nSupervision', category: 'operations', size: 28, x: centerX - 200, y: centerY - 100 },
-        { id: 'workflow', label: 'Workflow\nOptimization', category: 'operations', size: 24, x: centerX - 150, y: centerY + 50 },
-        { id: 'sop', label: 'SOP\nCompliance', category: 'operations', size: 22, x: centerX - 280, y: centerY },
-        { id: 'planning', label: 'Production\nPlanning', category: 'operations', size: 22, x: centerX - 180, y: centerY - 200 },
-        
-        // Quality
-        { id: 'haccp', label: 'HACCP', category: 'quality', size: 30, x: centerX + 50, y: centerY - 150 },
-        { id: 'gmp', label: 'GMP/GHP', category: 'quality', size: 24, x: centerX + 150, y: centerY - 50 },
-        { id: 'traceability', label: 'Traceability', category: 'quality', size: 22, x: centerX + 100, y: centerY - 250 },
-        { id: 'documentation', label: 'Documentation', category: 'quality', size: 22, x: centerX + 200, y: centerY - 180 },
-        
-        // Leadership
-        { id: 'team', label: 'Team\nDevelopment', category: 'leadership', size: 24, x: centerX - 100, y: centerY + 150 },
-        { id: 'stakeholder', label: 'Stakeholder\nComm.', category: 'leadership', size: 22, x: centerX + 50, y: centerY + 200 },
-        { id: 'coaching', label: 'Coaching', category: 'leadership', size: 20, x: centerX - 200, y: centerY + 180 },
-        
-        // Technical
-        { id: 'python', label: 'Python', category: 'technical', size: 26, x: centerX + 250, y: centerY + 50 },
-        { id: 'data', label: 'Data\nAnalysis', category: 'technical', size: 24, x: centerX + 180, y: centerY + 120 },
-        { id: 'statistics', label: 'Statistical\nMethods', category: 'technical', size: 22, x: centerX + 300, y: centerY - 50 },
-        { id: 'sql', label: 'SQL', category: 'technical', size: 18, x: centerX + 320, y: centerY + 100 },
-        
-        // Research
-        { id: 'biology', label: 'Systems\nBiology', category: 'research', size: 26, x: centerX - 50, y: centerY - 250 },
-        { id: 'imaging', label: 'Image\nProcessing', category: 'research', size: 22, x: centerX + 150, y: centerY - 300 },
-        { id: 'quantitative', label: 'Quantitative\nAnalysis', category: 'research', size: 24, x: centerX - 150, y: centerY - 280 },
-        { id: 'experimental', label: 'Experimental\nDesign', category: 'research', size: 22, x: centerX - 50, y: centerY - 350 }
-    ];
-    
-    // Connections between skills (skill transfer relationships)
-    const connections = [
-        // Operations internal
-        { from: 'production', to: 'workflow', strength: 0.9 },
-        { from: 'production', to: 'sop', strength: 0.8 },
-        { from: 'production', to: 'planning', strength: 0.85 },
-        { from: 'workflow', to: 'planning', strength: 0.7 },
-        
-        // Quality internal
-        { from: 'haccp', to: 'gmp', strength: 0.9 },
-        { from: 'haccp', to: 'traceability', strength: 0.8 },
-        { from: 'gmp', to: 'documentation', strength: 0.7 },
-        { from: 'traceability', to: 'documentation', strength: 0.75 },
-        
-        // Leadership internal
-        { from: 'team', to: 'coaching', strength: 0.85 },
-        { from: 'team', to: 'stakeholder', strength: 0.7 },
-        
-        // Technical internal
-        { from: 'python', to: 'data', strength: 0.9 },
-        { from: 'python', to: 'statistics', strength: 0.8 },
-        { from: 'data', to: 'statistics', strength: 0.85 },
-        { from: 'python', to: 'sql', strength: 0.7 },
-        
-        // Research internal
-        { from: 'biology', to: 'quantitative', strength: 0.85 },
-        { from: 'biology', to: 'imaging', strength: 0.8 },
-        { from: 'quantitative', to: 'experimental', strength: 0.9 },
-        { from: 'imaging', to: 'quantitative', strength: 0.7 },
-        
-        // Cross-category connections (skill transfer)
-        { from: 'production', to: 'team', strength: 0.6 },
-        { from: 'workflow', to: 'data', strength: 0.5 },
-        { from: 'sop', to: 'documentation', strength: 0.7 },
-        { from: 'haccp', to: 'sop', strength: 0.6 },
-        { from: 'data', to: 'quantitative', strength: 0.8 },
-        { from: 'statistics', to: 'quantitative', strength: 0.85 },
-        { from: 'python', to: 'biology', strength: 0.5 },
-        { from: 'stakeholder', to: 'documentation', strength: 0.4 },
-        { from: 'team', to: 'production', strength: 0.6 },
-        { from: 'experimental', to: 'data', strength: 0.7 }
-    ];
-    
-    // Physics simulation
-    let draggedNode = null;
-    let mouseX = 0, mouseY = 0;
-    let animationId = null;
-    let isSimulating = true;
-    
-    // Initialize velocities
-    nodes.forEach(node => {
-        node.vx = 0;
-        node.vy = 0;
-        node.targetX = node.x;
-        node.targetY = node.y;
-    });
-    
-    function applyForces() {
-        const repulsion = 5000;
-        const attraction = 0.005;
-        const damping = 0.85;
-        const centerGravity = 0.001;
-        
-        // Repulsion between nodes
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                const dx = nodes[j].x - nodes[i].x;
-                const dy = nodes[j].y - nodes[i].y;
-                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-                const force = repulsion / (dist * dist);
-                
-                const fx = (dx / dist) * force;
-                const fy = (dy / dist) * force;
-                
-                if (nodes[i] !== draggedNode) {
-                    nodes[i].vx -= fx;
-                    nodes[i].vy -= fy;
-                }
-                if (nodes[j] !== draggedNode) {
-                    nodes[j].vx += fx;
-                    nodes[j].vy += fy;
-                }
-            }
-        }
-        
-        // Attraction along connections
-        connections.forEach(conn => {
-            const from = nodes.find(n => n.id === conn.from);
-            const to = nodes.find(n => n.id === conn.to);
-            if (!from || !to) return;
-            
-            const dx = to.x - from.x;
-            const dy = to.y - from.y;
-            const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-            const force = dist * attraction * conn.strength;
-            
-            const fx = (dx / dist) * force;
-            const fy = (dy / dist) * force;
-            
-            if (from !== draggedNode) {
-                from.vx += fx;
-                from.vy += fy;
-            }
-            if (to !== draggedNode) {
-                to.vx -= fx;
-                to.vy -= fy;
-            }
-        });
-        
-        // Center gravity
-        nodes.forEach(node => {
-            if (node === draggedNode) return;
-            node.vx += (centerX - node.x) * centerGravity;
-            node.vy += (centerY - node.y) * centerGravity;
-        });
-        
-        // Update positions
-        nodes.forEach(node => {
-            if (node === draggedNode) return;
-            
-            node.vx *= damping;
-            node.vy *= damping;
-            
-            node.x += node.vx;
-            node.y += node.vy;
-            
-            // Boundary constraints
-            const margin = 50;
-            node.x = Math.max(margin, Math.min(rect.width - margin, node.x));
-            node.y = Math.max(margin, Math.min(rect.height - margin, node.y));
-        });
-    }
-    
-    function draw() {
-        // Draw particles
-        drawParticles();
-        ctx.clearRect(0, 0, rect.width, rect.height);
-        
-        // Draw connections
-        connections.forEach(conn => {
-            const from = nodes.find(n => n.id === conn.from);
-            const to = nodes.find(n => n.id === conn.to);
-            if (!from || !to) return;
-            
-            const gradient = ctx.createLinearGradient(from.x, from.y, to.x, to.y);
-            gradient.addColorStop(0, categories[from.category].color + '40');
-            gradient.addColorStop(1, categories[to.category].color + '40');
-            
-            ctx.beginPath();
-            ctx.moveTo(from.x, from.y);
-            ctx.lineTo(to.x, to.y);
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = conn.strength * 2;
-            ctx.stroke();
-        });
-        
-        // Draw nodes
-        nodes.forEach(node => {
-            const cat = categories[node.category];
-            const isHovered = isMouseOverNode(node);
-            
-            // Glow effect
-            if (isHovered) {
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.size + 10, 0, Math.PI * 2);
-                ctx.fillStyle = cat.color + '20';
-                ctx.fill();
-            }
-            
-            // Node circle
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
-            ctx.fillStyle = isHovered ? cat.color : cat.color + 'CC';
-            ctx.fill();
-            ctx.strokeStyle = cat.color;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            
-            // Node label
-            ctx.fillStyle = '#ffffff';
-            ctx.font = `bold ${Math.max(10, node.size * 0.45)}px Inter, sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            
-            const lines = node.label.split('\n');
-            const lineHeight = node.size * 0.5;
-            const startY = node.y - ((lines.length - 1) * lineHeight) / 2;
-            
-            lines.forEach((line, i) => {
-                ctx.fillText(line, node.x, startY + i * lineHeight);
-            });
-        });
-    }
-    
-    function isMouseOverNode(node) {
-        const dx = mouseX - node.x;
-        const dy = mouseY - node.y;
-        return Math.sqrt(dx * dx + dy * dy) < node.size + 5;
-    }
-    
-    function animate() {
-        if (isSimulating) {
-            applyForces();
-            updateParticles();
-        }
-        draw();
-        animationId = requestAnimationFrame(animate);
-    }
-    
-    // Mouse events
-    canvas.addEventListener('mousemove', (e) => {
-        const rect2 = canvas.getBoundingClientRect();
-        mouseX = e.clientX - rect2.left;
-        mouseY = e.clientY - rect2.top;
-        
-        if (draggedNode) {
-            draggedNode.x = mouseX;
-            draggedNode.y = mouseY;
-            draggedNode.vx = 0;
-            draggedNode.vy = 0;
-        }
-        
-        // Update tooltip
-        const hoveredNode = nodes.find(n => isMouseOverNode(n));
-        if (hoveredNode) {
-            const cat = categories[hoveredNode.category];
-            tooltip.innerHTML = `
-                <div class="tooltip-category">${cat.label}</div>
-                <h4>${hoveredNode.label.replace('\n', ' ')}</h4>
-            `;
-            tooltip.style.left = (mouseX + 15) + 'px';
-            tooltip.style.top = (mouseY - 10) + 'px';
-            tooltip.classList.add('visible');
-            canvas.style.cursor = 'pointer';
-        } else {
-            tooltip.classList.remove('visible');
-            canvas.style.cursor = draggedNode ? 'grabbing' : 'grab';
-        }
-    });
-    
-    canvas.addEventListener('mousedown', (e) => {
-        const rect2 = canvas.getBoundingClientRect();
-        mouseX = e.clientX - rect2.left;
-        mouseY = e.clientY - rect2.top;
-        
-        draggedNode = nodes.find(n => isMouseOverNode(n));
-        if (draggedNode) {
-            canvas.style.cursor = 'grabbing';
-        }
-    });
-    
-    canvas.addEventListener('mouseup', () => {
-        draggedNode = null;
-        canvas.style.cursor = 'grab';
-    });
-    
-    canvas.addEventListener('mouseleave', () => {
-        draggedNode = null;
-        tooltip.classList.remove('visible');
-    });
-    
-    // Touch events
-    canvas.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        const rect2 = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        mouseX = touch.clientX - rect2.left;
-        mouseY = touch.clientY - rect2.top;
-        
-        draggedNode = nodes.find(n => isMouseOverNode(n));
-    });
-    
-    canvas.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        if (!draggedNode) return;
-        
-        const rect2 = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        mouseX = touch.clientX - rect2.left;
-        mouseY = touch.clientY - rect2.top;
-        
-        draggedNode.x = mouseX;
-        draggedNode.y = mouseY;
-        draggedNode.vx = 0;
-        draggedNode.vy = 0;
-    });
-    
-    canvas.addEventListener('touchend', () => {
-        draggedNode = null;
-    });
-    
-    // Start animation
-    animate();
-    
-    // Handle resize
-    window.addEventListener('resize', () => {
-        const newRect = canvas.getBoundingClientRect();
-        canvas.width = newRect.width * dpr;
-        canvas.height = newRect.height * dpr;
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
         ctx.scale(dpr, dpr);
-        canvas.style.width = newRect.width + 'px';
-        canvas.style.height = newRect.height + 'px';
-    });
-}
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = rect.height + 'px';
 
-// Initialize skills graph when DOM is ready
-document.addEventListener('DOMContentLoaded', initSkillsGraph);
+        const categories = {
+            operations: { color: '#2563eb', bg: 'rgba(37,99,235,0.08)', label: 'Operations' },
+            quality: { color: '#059669', bg: 'rgba(5,150,105,0.08)', label: 'Quality' },
+            leadership: { color: '#7c3aed', bg: 'rgba(124,58,237,0.08)', label: 'Leadership' },
+            technical: { color: '#d97706', bg: 'rgba(217,119,6,0.08)', label: 'Technical' },
+            research: { color: '#dc2626', bg: 'rgba(220,38,38,0.08)', label: 'Research' }
+        };
 
+        const pillH = 28, pillR = 14, pillPad = 14, fontSize = 12;
+        const cx = rect.width / 2, cy = rect.height / 2;
+
+        const nodes = [
+            { id: 'production', label: 'Production Supervision', category: 'operations', x: cx - 300, y: cy - 100 },
+            { id: 'workflow', label: 'Workflow Optimization', category: 'operations', x: cx - 280, y: cy + 30 },
+            { id: 'sop', label: 'SOP Compliance', category: 'operations', x: cx - 330, y: cy + 140 },
+            { id: 'planning', label: 'Production Planning', category: 'operations', x: cx - 230, y: cy + 190 },
+            { id: 'haccp', label: 'HACCP', category: 'quality', x: cx + 90, y: cy - 200 },
+            { id: 'gmp', label: 'GMP / GHP', category: 'quality', x: cx + 230, y: cy - 130 },
+            { id: 'traceability', label: 'Traceability', category: 'quality', x: cx + 110, y: cy - 290 },
+            { id: 'documentation', label: 'Documentation', category: 'quality', x: cx + 240, y: cy - 230 },
+            { id: 'team', label: 'Team Development', category: 'leadership', x: cx - 130, y: cy + 260 },
+            { id: 'stakeholder', label: 'Stakeholder Comm.', category: 'leadership', x: cx + 90, y: cy + 280 },
+            { id: 'coaching', label: 'Coaching', category: 'leadership', x: cx - 250, y: cy + 250 },
+            { id: 'python', label: 'Python', category: 'technical', x: cx + 310, y: cy + 60 },
+            { id: 'data', label: 'Data Analysis', category: 'technical', x: cx + 230, y: cy + 160 },
+            { id: 'statistics', label: 'Statistical Methods', category: 'technical', x: cx + 370, y: cy + 0 },
+            { id: 'sql', label: 'SQL', category: 'technical', x: cx + 370, y: cy + 130 },
+            { id: 'biology', label: 'Systems Biology', category: 'research', x: cx - 70, y: cy - 250 },
+            { id: 'imaging', label: 'Image Processing', category: 'research', x: cx + 170, y: cy - 330 },
+            { id: 'quantitative', label: 'Quantitative Analysis', category: 'research', x: cx - 170, y: cy - 280 },
+            { id: 'experimental', label: 'Experimental Design', category: 'research', x: cx - 50, y: cy - 360 }
+        ];
+
+        ctx.font = '600 ' + fontSize + 'px Inter, sans-serif';
+        nodes.forEach(function(n) { n.pw = ctx.measureText(n.label).width + pillPad * 2; });
+
+        var connections = [
+            { from: 'production', to: 'workflow', strength: 0.9 }, { from: 'production', to: 'sop', strength: 0.8 },
+            { from: 'production', to: 'planning', strength: 0.85 }, { from: 'workflow', to: 'planning', strength: 0.7 },
+            { from: 'haccp', to: 'gmp', strength: 0.9 }, { from: 'haccp', to: 'traceability', strength: 0.8 },
+            { from: 'gmp', to: 'documentation', strength: 0.7 }, { from: 'traceability', to: 'documentation', strength: 0.75 },
+            { from: 'team', to: 'coaching', strength: 0.85 }, { from: 'team', to: 'stakeholder', strength: 0.7 },
+            { from: 'python', to: 'data', strength: 0.9 }, { from: 'python', to: 'statistics', strength: 0.8 },
+            { from: 'data', to: 'statistics', strength: 0.85 }, { from: 'python', to: 'sql', strength: 0.7 },
+            { from: 'biology', to: 'quantitative', strength: 0.85 }, { from: 'biology', to: 'imaging', strength: 0.8 },
+            { from: 'quantitative', to: 'experimental', strength: 0.9 }, { from: 'imaging', to: 'quantitative', strength: 0.7 },
+            { from: 'production', to: 'team', strength: 0.6 }, { from: 'workflow', to: 'data', strength: 0.5 },
+            { from: 'sop', to: 'documentation', strength: 0.7 }, { from: 'haccp', to: 'sop', strength: 0.6 },
+            { from: 'data', to: 'quantitative', strength: 0.8 }, { from: 'statistics', to: 'quantitative', strength: 0.85 },
+            { from: 'python', to: 'biology', strength: 0.5 }, { from: 'stakeholder', to: 'documentation', strength: 0.4 },
+            { from: 'team', to: 'production', strength: 0.6 }, { from: 'experimental', to: 'data', strength: 0.7 }
+        ];
+
+        var draggedNode = null, mouseX = 0, mouseY = 0, animId = null;
+        nodes.forEach(function(n) { n.vx = 0; n.vy = 0; });
+
+        function applyForces() {
+            var rep = 6000, att = 0.006, damp = 0.85, cg = 0.001;
+            for (var i = 0; i < nodes.length; i++) {
+                for (var j = i + 1; j < nodes.length; j++) {
+                    var dx = nodes[j].x - nodes[i].x, dy = nodes[j].y - nodes[i].y;
+                    var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                    var force = rep / (dist * dist);
+                    var fx = (dx / dist) * force, fy = (dy / dist) * force;
+                    if (nodes[i] !== draggedNode) { nodes[i].vx -= fx; nodes[i].vy -= fy; }
+                    if (nodes[j] !== draggedNode) { nodes[j].vx += fx; nodes[j].vy += fy; }
+                }
+            }
+            connections.forEach(function(conn) {
+                var f = nodes.find(function(n) { return n.id === conn.from; });
+                var t = nodes.find(function(n) { return n.id === conn.to; });
+                if (!f || !t) return;
+                var dx = t.x - f.x, dy = t.y - f.y;
+                var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                var force = dist * att * conn.strength;
+                var fx = (dx / dist) * force, fy = (dy / dist) * force;
+                if (f !== draggedNode) { f.vx += fx; f.vy += fy; }
+                if (t !== draggedNode) { t.vx -= fx; t.vy -= fy; }
+            });
+            nodes.forEach(function(n) {
+                if (n === draggedNode) return;
+                n.vx += (cx - n.x) * cg;
+                n.vy += (cy - n.y) * cg;
+                n.vx *= damp; n.vy *= damp;
+                n.x += n.vx; n.y += n.vy;
+                var m = 50;
+                n.x = Math.max(m + n.pw/2, Math.min(rect.width - m - n.pw/2, n.x));
+                n.y = Math.max(m + pillH, Math.min(rect.height - m, n.y));
+            });
+        }
+
+        function drawPill(n, hovered) {
+            var cat = categories[n.category];
+            var w = n.pw, h = pillH, r = pillR;
+            var x = n.x - w/2, y = n.y - h/2;
+            ctx.save();
+            ctx.shadowColor = 'rgba(0,0,0,0.06)';
+            ctx.shadowBlur = hovered ? 10 : 3;
+            ctx.shadowOffsetY = 1;
+            ctx.beginPath();
+            ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+            ctx.fillStyle = hovered ? cat.color : cat.bg;
+            ctx.fill();
+            ctx.strokeStyle = hovered ? cat.color : cat.color + '30';
+            ctx.lineWidth = hovered ? 2 : 1;
+            ctx.stroke();
+            ctx.shadowColor = 'transparent';
+            ctx.fillStyle = hovered ? '#ffffff' : cat.color;
+            ctx.font = '600 ' + fontSize + 'px Inter, sans-serif';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(n.label, n.x, n.y);
+            ctx.restore();
+        }
+
+        function isOverNode(n, mx, my) {
+            return Math.abs(mx - n.x) < n.pw/2 + 6 && Math.abs(my - n.y) < pillH/2 + 6;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, rect.width, rect.height);
+            connections.forEach(function(conn) {
+                var f = nodes.find(function(n) { return n.id === conn.from; });
+                var t = nodes.find(function(n) { return n.id === conn.to; });
+                if (!f || !t) return;
+                ctx.beginPath(); ctx.moveTo(f.x, f.y); ctx.lineTo(t.x, t.y);
+                ctx.strokeStyle = 'rgba(148,163,184,0.22)';
+                ctx.lineWidth = Math.max(0.5, conn.strength * 1.2);
+                ctx.stroke();
+            });
+            nodes.forEach(function(n) { drawPill(n, isOverNode(n, mouseX, mouseY)); });
+        }
+
+        function animate() {
+            applyForces(); draw();
+            animId = requestAnimationFrame(animate);
+        }
+
+        var tooltip = document.createElement('div');
+        tooltip.className = 'skill-tooltip';
+        canvas.parentElement.appendChild(tooltip);
+
+        canvas.addEventListener('mousemove', function(e) {
+            var r = canvas.getBoundingClientRect();
+            mouseX = e.clientX - r.left; mouseY = e.clientY - r.top;
+            if (draggedNode) { draggedNode.x = mouseX; draggedNode.y = mouseY; draggedNode.vx = 0; draggedNode.vy = 0; }
+            var hovered = nodes.find(function(n) { return isOverNode(n, mouseX, mouseY); });
+            if (hovered) {
+                var cat = categories[hovered.category];
+                tooltip.innerHTML = '<div class="tooltip-category">' + cat.label + '</div><h4>' + hovered.label + '</h4>';
+                tooltip.style.left = (mouseX + 15) + 'px'; tooltip.style.top = (mouseY - 10) + 'px';
+                tooltip.classList.add('visible'); canvas.style.cursor = 'pointer';
+            } else { tooltip.classList.remove('visible'); canvas.style.cursor = 'grab'; }
+        });
+
+        canvas.addEventListener('mousedown', function(e) {
+            var r = canvas.getBoundingClientRect();
+            mouseX = e.clientX - r.left; mouseY = e.clientY - r.top;
+            draggedNode = nodes.find(function(n) { return isOverNode(n, mouseX, mouseY); }) || null;
+            if (draggedNode) canvas.style.cursor = 'grabbing';
+        });
+
+        canvas.addEventListener('mouseup', function() { draggedNode = null; canvas.style.cursor = 'grab'; });
+        canvas.addEventListener('mouseleave', function() { draggedNode = null; tooltip.classList.remove('visible'); });
+
+        canvas.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            var r = canvas.getBoundingClientRect(), t = e.touches[0];
+            mouseX = t.clientX - r.left; mouseY = t.clientY - r.top;
+            draggedNode = nodes.find(function(n) { return isOverNode(n, mouseX, mouseY); }) || null;
+        });
+        canvas.addEventListener('touchmove', function(e) {
+            e.preventDefault(); if (!draggedNode) return;
+            var r = canvas.getBoundingClientRect(), t = e.touches[0];
+            mouseX = t.clientX - r.left; mouseY = t.clientY - r.top;
+            draggedNode.x = mouseX; draggedNode.y = mouseY; draggedNode.vx = 0; draggedNode.vy = 0;
+        });
+        canvas.addEventListener('touchend', function() { draggedNode = null; });
+
+        animate();
+
+        window.addEventListener('resize', function() {
+            var newRect = canvas.getBoundingClientRect();
+            canvas.width = newRect.width * dpr; canvas.height = newRect.height * dpr;
+            ctx.scale(dpr, dpr);
+            canvas.style.width = newRect.width + 'px'; canvas.style.height = newRect.height + 'px';
+        });
+    }
+
+    // Initialize skills graph when DOM is ready
+    document.addEventListener('DOMContentLoaded', initSkillsGraph);
 
