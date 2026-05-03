@@ -61,81 +61,150 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <!-- Animated Background -->
+        <div class="hero-bg">
+            <div class="hero-grid"></div>
+            <div class="hero-glow-1"></div>
+            <div class="hero-glow-2"></div>
+            <div class="hero-glow-3"></div>
+        </div>
+        
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
                     <div class="hero-badge">
-                        <span class="hero-badge-dot"></span>
-                        Available for Opportunities
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                            <circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="5" cy="5" r="2" fill="currentColor"/>
+                        </svg>
+                        <span>Currently Open to Opportunities</span>
                     </div>
-                    <h1 class="hero-title">
-                        Hi, I'm <span class="gradient-text">Gaurav</span>
-                    </h1>
+                    
+                    <div class="hero-title-wrap">
+                        <h1 class="hero-title">
+                            <span class="hero-title-line">Transforming Data into</span>
+                            <span class="hero-title-line">Operational Excellence</span>
+                        </h1>
+                        <div class="hero-title-sub">
+                            I'm <span class="gradient-text">Gaurav Shajepal</span>
+                        </div>
+                    </div>
+                    
                     <div class="hero-role">
                         <span class="typing-text" id="typingText"></span><span class="typing-cursor"></span>
                     </div>
+                    
                     <p class="hero-description">
-                        Bridging quantitative research methods with practical production management in high-precision environments.
+                        Strategic operations leader bridging quantitative research with production excellence in high-precision environments. Specializing in quality systems, process optimization, and data-driven decision making.
                     </p>
-                    <div class="hero-buttons">
-                        <a href="#experience" class="btn btn-primary">
-                            <i class="fas fa-briefcase"></i> View Experience
-                        </a>
-                        <a href="resume.html" class="btn btn-secondary">
-                            <i class="fas fa-file-alt"></i> Resume
-                        </a>
-                        <a href="#projects" class="btn btn-outline">
-                            <i class="fas fa-code"></i> Projects
-                        </a>
+                    
+                                        <div class="hero-buttons">
+                        <!-- Primary action button will go here when needed -->
                     </div>
+                    
                     <div class="hero-stats">
                         <div class="hero-stat">
-                            <span class="hero-stat-num">4+</span>
+                            <span class="hero-stat-num" data-target="4">0</span>
                             <span class="hero-stat-label">Years Experience</span>
                         </div>
+                        <div class="hero-stat-divider"></div>
                         <div class="hero-stat">
-                            <span class="hero-stat-num">3</span>
+                            <span class="hero-stat-num" data-target="3">0</span>
                             <span class="hero-stat-label">Research Labs</span>
                         </div>
+                        <div class="hero-stat-divider"></div>
                         <div class="hero-stat">
-                            <span class="hero-stat-num">2</span>
+                            <span class="hero-stat-num" data-target="2">0</span>
                             <span class="hero-stat-label">Publications</span>
                         </div>
                     </div>
                 </div>
-                <div class="hero-sidebar">
-                    <div class="hero-profile-card">
-                        <div class="hero-avatar">
-                            <span>GS</span>
+                
+                <div class="hero-visual">
+                    <div class="hero-card-group">
+                        <!-- Floating Profile Card -->
+                        <div class="hero-float-card card-profile">
+                            <div class="card-avatar">
+                                <div class="avatar-ring"></div>
+                                <div class="avatar-content">
+                                    <span>GS</span>
+                                </div>
+                            </div>
+                            <h3>Gaurav Shajepal</h3>
+                            <p class="card-role">Operations & Quality Leadership</p>
+                            <div class="card-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Montreal, Quebec, Canada
+                            </div>
+                            <div class="card-expertise">
+                                <span>Quality Systems</span>
+                                <span>Operations</span>
+                                <span>Data Analysis</span>
+                            </div>
                         </div>
-                        <h3>Gaurav Shajepal</h3>
-                        <p class="hero-profile-role">Operations & Quality Professional</p>
-                        <div class="hero-profile-tags">
-                            <span>Montreal, QC</span>
-                            <span>Canada</span>
+                        
+                        <!-- Floating Stats Card -->
+                        <div class="hero-float-card card-stats">
+                            <h4>Core Expertise</h4>
+                            <div class="stat-row">
+                                <div class="stat-dot" style="background: #3b82f6"></div>
+                                <span>HACCP Compliance</span>
+                                <strong>Expert</strong>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-dot" style="background: #06b6d4"></div>
+                                <span>Production Management</span>
+                                <strong>Expert</strong>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-dot" style="background: #10b981"></div>
+                                <span>Systems Biology</span>
+                                <strong>Advanced</strong>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-dot" style="background: #f59e0b"></div>
+                                <span>Process Optimization</span>
+                                <strong>Advanced</strong>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hero-connect-card">
-                        <h4>Get in Touch</h4>
-                        <div class="hero-connect-links">
-                            <a href="mailto:gauravshajepal@gmail.com" class="hero-connect-link" title="Email">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                            <a href="tel:+15145609715" class="hero-connect-link" title="Phone">
-                                <i class="fas fa-phone"></i>
-                            </a>
-                            <a href="https://github.com/gauravshajepal-hash" target="_blank" class="hero-connect-link" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/gauravshajepal" target="_blank" class="hero-connect-link" title="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
+                        
+                        <!-- Floating Connect Card -->
+                        <div class="hero-float-card card-connect">
+                            <h4>Let's Connect</h4>
+                            <div class="connect-links">
+                                <a href="mailto:gauravshajepal@gmail.com" class="connect-item">
+                                    <div class="connect-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <span>Email</span>
+                                </a>
+                                <a href="https://linkedin.com/in/gauravshajepal" target="_blank" class="connect-item">
+                                    <div class="connect-icon">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </div>
+                                    <span>LinkedIn</span>
+                                </a>
+                                <a href="https://github.com/gauravshajepal-hash" target="_blank" class="connect-item">
+                                    <div class="connect-icon">
+                                        <i class="fab fa-github"></i>
+                                    </div>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="resume.html" class="connect-item">
+                                    <div class="connect-icon">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <span>Resume</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <div class="scroll-indicator">
+            <span>Scroll</span>
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
@@ -276,50 +345,89 @@
     <section id="projects" class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Projects</span>
+                <span class="section-label">Selected Work</span>
                 <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">Data Science, Modelling & Dashboard Development</p>
+                <p class="section-subtitle">Data science, epidemiological modelling & interactive visualization</p>
             </div>
             <div class="projects-grid">
-                <!-- Project 1 - HIV Model -->
+                <!-- Project 1 - ModelHIV -->
                 <div class="project-card project-featured">
-                    <div class="project-featured-left">
-                        <div class="project-header">
-                            <span class="project-status status-progress">In Progress</span>
-                            <span class="project-lang"><i class="fas fa-circle"></i> Python</span>
-                        </div>
-                        <h3 class="project-title">ModelHIV-PH</h3>
-                        <div class="project-tags">
-                            <span>Epidemiology</span>
-                            <span>Modelling</span>
-                            <span>Python</span>
-                            <span>Simulation</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/gauravshajepal-hash/ModelHIV-PH" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                            <a href="https://gauravshajepal-hash.github.io/epigraph-ph/" target="_blank" class="project-link project-link-primary">
-                                <i class="fas fa-external-link-alt"></i> Live Dashboard
-                            </a>
+                    <div class="project-preview">
+                        <div class="preview-mockup">
+                            <div class="preview-topbar">
+                                <div class="preview-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="preview-url">modelhiv-ph</div>
+                            </div>
+                            <div class="preview-body">
+                                <div class="preview-sidebar">
+                                    <div class="preview-nav-item active"></div>
+                                    <div class="preview-nav-item"></div>
+                                    <div class="preview-nav-item"></div>
+                                    <div class="preview-nav-item"></div>
+                                </div>
+                                <div class="preview-content">
+                                    <div class="preview-title-bar" style="background: linear-gradient(90deg, #3b82f6, #0891b2);"></div>
+                                    <div class="preview-kpi-row">
+                                        <div class="preview-kpi">
+                                            <div class="preview-kpi-val" style="color: #3b82f6;">Rt</div>
+                                            <div class="preview-kpi-label">0.82</div>
+                                        </div>
+                                        <div class="preview-kpi">
+                                            <div class="preview-kpi-val" style="color: #06b6d4;">Prev%</div>
+                                            <div class="preview-kpi-label">1.2%</div>
+                                        </div>
+                                        <div class="preview-kpi">
+                                            <div class="preview-kpi-val" style="color: #10b981;">New/Yr</div>
+                                            <div class="preview-kpi-label">3.4k</div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-chart">
+                                        <svg viewBox="0 0 200 80" class="preview-chart-svg">
+                                            <polyline points="10,70 30,60 50,65 70,50 90,55 110,40 130,45 150,30 170,35 190,20" 
+                                                fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/>
+                                            <polyline points="10,75 50,68 90,72 130,58 170,50 190,45" 
+                                                fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4,3" stroke-linecap="round"/>
+                                            <circle cx="190" cy="20" r="4" fill="#3b82f6"/>
+                                        </svg>
+                                    </div>
+                                    <div class="preview-bar-row">
+                                        <div class="preview-bar" style="height:70%;background:#3b82f6;"></div>
+                                        <div class="preview-bar" style="height:50%;background:#06b6d4;"></div>
+                                        <div class="preview-bar" style="height:85%;background:#10b981;"></div>
+                                        <div class="preview-bar" style="height:60%;background:#8b5cf6;"></div>
+                                        <div class="preview-bar" style="height:45%;background:#f59e0b;"></div>
+                                        <div class="preview-bar" style="height:75%;background:#ef4444;"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="project-featured-right">
-                        <p class="project-desc">
-                            Computational model for HIV epidemic dynamics in the Philippines. 
-                            Building simulation frameworks to analyse transmission patterns, intervention impact, 
-                            and policy scenarios using epidemiological modelling techniques.
-                        </p>
+                    <div class="project-header">
+                        <span class="project-status status-progress">In Progress</span>
+                        <span class="project-lang"><i class="fas fa-code"></i> Python</span>
+                    </div>
+                    <h3 class="project-title">ModelHIV-PH</h3>
+                    <p class="project-desc">
+                        Agent-based computational model for HIV epidemic dynamics in the Philippines. Analyzing transmission patterns, intervention impact, and policy scenarios using compartmental and network-based epidemiological modelling.
+                    </p>
+                    <div class="project-tags">
+                        <span>Epidemiology</span>
+                        <span>Agent-Based</span>
+                        <span>Modelling</span>
+                        <span>Python</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/gauravshajepal-hash/ModelHIV-PH" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> Source Code
+                        </a>
                     </div>
                 </div>
 
                 <!-- Project 2 - EpiGraph Dashboard -->
                 <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-status status-complete">Completed</span>
-                        <span class="project-lang"><i class="fas fa-circle"></i> Python</span>
-                    </div>
-                    <a href="https://gauravshajepal-hash.github.io/epigraph-ph/" target="_blank" class="project-preview">
+                    <div class="project-preview">
                         <div class="preview-mockup">
                             <div class="preview-topbar">
                                 <div class="preview-dots">
@@ -347,7 +455,7 @@
                                         </div>
                                         <div class="preview-kpi">
                                             <div class="preview-kpi-val">67%</div>
-                                            <div class="preview-kpi-label">Suppressed</div>
+                                            <div class="preview-kpi-label">VLS</div>
                                         </div>
                                     </div>
                                     <div class="preview-chart">
@@ -369,19 +477,21 @@
                             </div>
                         </div>
                         <div class="preview-overlay">
-                            <span><i class="fas fa-external-link-alt"></i> View Live Dashboard</span>
+                            <span><i class="fas fa-external-link-alt"></i> View Dashboard</span>
                         </div>
-                    </a>
+                    </div>
+                    <div class="project-header">
+                        <span class="project-status status-complete">Completed</span>
+                        <span class="project-lang"><i class="fas fa-code"></i> JavaScript</span>
+                    </div>
                     <h3 class="project-title">EpiGraph-PH</h3>
                     <p class="project-desc">
-                        Interactive HIV epidemiological dashboard for the Philippines. 
-                        Visualizes 95-95-95 cascade, regional inequality, historical burden, 
-                        and key population tracking.
+                        Interactive epidemiological dashboard visualizing the Philippines' HIV response. Tracks 95-95-95 cascade metrics, regional disparities, and key population data across 17 regions.
                     </p>
                     <div class="project-tags">
                         <span>Dashboard</span>
                         <span>ECharts</span>
-                        <span>Plotly</span>
+                        <span>D3.js</span>
                         <span>Public Health</span>
                     </div>
                     <div class="project-links">

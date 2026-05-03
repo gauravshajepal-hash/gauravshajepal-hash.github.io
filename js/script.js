@@ -131,6 +131,42 @@ revealElements.forEach(element => {
     revealObserver.observe(element);
 });
 
+// Animated Counter for Stats
+function animateCounters() {
+    const counters = document.querySelectorAll('.hero-stat-num[data-target]');
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                counter.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+            }
+        };
+        
+        // Use IntersectionObserver to trigger animation when visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(updateCounter, 300);
+                    observer.unobserve(entry);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(counter);
+    });
+}
+
+// Initialize counters
+animateCounters();
+
 // Typing Animation
 const typingTexts = [
     'Systems Biology & Production Management',
@@ -173,144 +209,4 @@ function typeText() {
 
 typeText();
 
-// GitHub Repos Fetch
-async function fetchGitHubRepos() {
-    const grid = document.getElementById('reposGrid');
-    if (!grid) return;
-    
-    try {
-        const response = await fetch('https://api.github.com/users/gauravshajepal-hash/repos?sort=updated&per_page=6');
-        const repos = await response.json();
-        
-        if (!Array.isArray(repos)) {
-            grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);">Could not load repositories.</p>';
-            return;
-        }
-        
-        const langColors = {
-            Python: 'lang-python',
-            JavaScript: 'lang-javascript',
-            TypeScript: 'lang-typescript',
-            HTML: 'lang-html',
-            CSS: 'lang-css',
-            Shell: 'lang-shell',
-            Jupyter: 'lang-jupyter'
-        };
-        
-        grid.innerHTML = repos
-            .filter(repo => !repo.fork)
-            .slice(0, 6)
-            .map(repo => `
-                <div class="repo-card">
-                    <div class="repo-card-header">
-                        <div class="repo-name">
-                            <i class="fas fa-folder"></i>
-                            ${repo.name}
-                        </div>
-                        ${repo.stargazers_count > 0 ? `
-                            <span class="repo-stars">
-                                <i class="fas fa-star"></i> ${repo.stargazers_count}
-                            </span>
-                        ` : ''}
-                    </div>
-                    <p class="repo-desc">${repo.description || 'No description available.'}</p>
-                    <div class="repo-footer">
-                        <span class="repo-lang">
-                            ${repo.language ? `
-                                <span class="repo-lang-dot ${langColors[repo.language] || 'lang-other'}"></span>
-                                ${repo.language}
-                            ` : ''}
-                        </span>
-                        <a href="${repo.html_url}" target="_blank" class="repo-link">
-                            View <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            `).join('');
-        
-        // Observe new repo cards
-        document.querySelectorAll('.repo-card').forEach(card => {
-            revealObserver.observe(card);
-        });
-        
-    } catch (error) {
-        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);">Could not load repositories.</p>';
-    }
-}
 
-fetchGitHubRepos();
-
-// Back to top button
-const backToTopBtn = document.createElement('button');
-backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-backToTopBtn.className = 'back-to-top';
-backToTopBtn.setAttribute('aria-label', 'Back to top');
-document.body.appendChild(backToTopBtn);
-
-const style = document.createElement('style');
-style.textContent = `
-    .back-to-top {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background: var(--accent-gradient);
-        color: white;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(20px);
-        transition: all 0.3s ease;
-        z-index: 999;
-    }
-    .back-to-top.visible {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-    .back-to-top:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-    }
-`;
-document.head.appendChild(style);
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        backToTopBtn.classList.add('visible');
-    } else {
-        backToTopBtn.classList.remove('visible');
-    }
-});
-
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Keyboard navigation support
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const navLinks = document.getElementById('navLinks');
-        if (navLinks && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            const icon = document.querySelector('.mobile-menu-btn i');
-            if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        }
-    }
-});
-
-console.log('Gaurav Shajepal Portfolio - Loaded Successfully!');
