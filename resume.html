@@ -12,10 +12,10 @@
     <style>
         .resume-page {
             padding-top: 100px;
-            min-height: 100vh;
+            padding-bottom: 4rem;
         }
 
-        .resume-header {
+        .resume-toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -24,56 +24,297 @@
             gap: 1rem;
         }
 
-        .resume-header h1 {
-            font-size: 1.6rem;
+        .resume-toolbar h1 {
+            font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resume-toolbar h1 i {
+            color: var(--accent-primary);
         }
 
         .resume-actions {
             display: flex;
-            gap: 0.75rem;
-            align-items: center;
+            gap: 0.6rem;
         }
 
-        .resume-container {
-            background: var(--card-bg);
+        /* LaTeX-style resume container */
+        .resume-paper {
+            background: #ffffff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 3.5rem;
             border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--card-border);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            position: relative;
+            color: #1a1a1a;
+            font-family: 'Inter', 'Latin Modern Roman', 'Computer Modern', serif;
+            font-size: 0.92rem;
+            line-height: 1.55;
         }
 
-        .resume-embed {
-            width: 100%;
-            height: calc(100vh - 220px);
-            min-height: 600px;
-            border: none;
-            display: block;
+        [data-theme="dark"] .resume-paper {
+            background: #1e293b;
+            color: #e2e8f0;
         }
 
-        .resume-fallback {
-            display: none;
-            padding: 3rem 2rem;
+        /* Header */
+        .cv-header {
             text-align: center;
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 2px solid #2563eb;
         }
 
-        .resume-fallback i {
-            font-size: 3rem;
-            color: var(--accent-primary);
-            margin-bottom: 1rem;
+        .cv-name {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #0f172a;
+            margin-bottom: 0.6rem;
         }
 
-        .resume-fallback p {
-            color: var(--text-secondary);
+        [data-theme="dark"] .cv-name {
+            color: #f1f5f9;
+        }
+
+        .cv-contact {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            font-size: 0.82rem;
+            color: #475569;
+        }
+
+        [data-theme="dark"] .cv-contact {
+            color: #94a3b8;
+        }
+
+        .cv-contact a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .cv-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .cv-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .cv-contact-item i {
+            font-size: 0.75rem;
+            color: #2563eb;
+        }
+
+        /* Section */
+        .cv-section {
             margin-bottom: 1.5rem;
         }
 
+        .cv-section-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #2563eb;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 0.35rem;
+            margin-bottom: 0.85rem;
+        }
+
+        [data-theme="dark"] .cv-section-title {
+            border-bottom-color: #334155;
+        }
+
+        /* Entry */
+        .cv-entry {
+            margin-bottom: 1.1rem;
+        }
+
+        .cv-entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .cv-entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.15rem;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .cv-entry-title {
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: #0f172a;
+        }
+
+        [data-theme="dark"] .cv-entry-title {
+            color: #f1f5f9;
+        }
+
+        .cv-entry-date {
+            font-size: 0.82rem;
+            color: #64748b;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .cv-entry-sub {
+            font-style: italic;
+            color: #475569;
+            font-size: 0.85rem;
+            margin-bottom: 0.35rem;
+        }
+
+        [data-theme="dark"] .cv-entry-sub {
+            color: #94a3b8;
+        }
+
+        .cv-entry ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cv-entry li {
+            padding-left: 1.2rem;
+            position: relative;
+            margin-bottom: 0.25rem;
+            font-size: 0.88rem;
+            color: #334155;
+        }
+
+        [data-theme="dark"] .cv-entry li {
+            color: #cbd5e1;
+        }
+
+        .cv-entry li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* Skills */
+        .cv-skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 2rem;
+        }
+
+        .cv-skill-row {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.88rem;
+        }
+
+        .cv-skill-label {
+            font-weight: 700;
+            color: #0f172a;
+            min-width: 120px;
+            flex-shrink: 0;
+        }
+
+        [data-theme="dark"] .cv-skill-label {
+            color: #f1f5f9;
+        }
+
+        .cv-skill-value {
+            color: #475569;
+        }
+
+        [data-theme="dark"] .cv-skill-value {
+            color: #94a3b8;
+        }
+
+        /* Publications */
+        .cv-pub {
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+        }
+
+        .cv-pub-title {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        [data-theme="dark"] .cv-pub-title {
+            color: #f1f5f9;
+        }
+
+        .cv-pub-journal {
+            font-style: italic;
+            color: #475569;
+        }
+
+        [data-theme="dark"] .cv-pub-journal {
+            color: #94a3b8;
+        }
+
+        .cv-pub a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .cv-pub a:hover {
+            text-decoration: underline;
+        }
+
+        /* Print */
+        @media print {
+            .navbar, .resume-toolbar, .floating-shapes, .back-to-top {
+                display: none !important;
+            }
+
+            .resume-page {
+                padding-top: 0;
+            }
+
+            .resume-paper {
+                box-shadow: none;
+                border: none;
+                padding: 1.5rem;
+                max-width: 100%;
+            }
+
+            body {
+                background: white;
+            }
+        }
+
         @media (max-width: 768px) {
-            .resume-embed {
-                height: calc(100vh - 180px);
-                min-height: 500px;
+            .resume-paper {
+                padding: 2rem 1.5rem;
+            }
+
+            .cv-name {
+                font-size: 1.5rem;
+            }
+
+            .cv-contact {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.3rem;
+            }
+
+            .cv-skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cv-entry-header {
+                flex-direction: column;
             }
         }
     </style>
@@ -110,27 +351,280 @@
     <!-- Resume Section -->
     <section class="resume-page">
         <div class="container">
-            <div class="resume-header">
-                <h1><i class="fas fa-file-alt" style="color:var(--accent-primary);margin-right:0.5rem;"></i> Resume</h1>
+            <div class="resume-toolbar">
+                <h1><i class="fas fa-file-alt"></i> Resume</h1>
                 <div class="resume-actions">
+                    <button onclick="window.print()" class="btn btn-secondary">
+                        <i class="fas fa-print"></i> Print
+                    </button>
                     <a href="My_CV.pdf" download="Gaurav_Shajepal_CV.pdf" class="btn btn-primary">
                         <i class="fas fa-download"></i> Download PDF
                     </a>
-                    <a href="My_CV.pdf" target="_blank" class="btn btn-secondary">
-                        <i class="fas fa-external-link-alt"></i> Open in New Tab
-                    </a>
                 </div>
             </div>
-            <div class="resume-container">
-                <object data="My_CV.pdf" type="application/pdf" class="resume-embed" id="resumeEmbed">
-                    <div class="resume-fallback" id="resumeFallback">
-                        <i class="fas fa-file-pdf"></i>
-                        <p>Your browser doesn't support PDF preview.</p>
-                        <a href="My_CV.pdf" download="Gaurav_Shajepal_CV.pdf" class="btn btn-primary">
-                            <i class="fas fa-download"></i> Download PDF Instead
-                        </a>
+
+            <div class="resume-paper">
+                <!-- Header -->
+                <div class="cv-header">
+                    <div class="cv-name">Gaurav Shajepal</div>
+                    <div class="cv-contact">
+                        <span class="cv-contact-item">
+                            <i class="fas fa-map-marker-alt"></i> Montreal, Quebec, Canada
+                        </span>
+                        <span class="cv-contact-item">
+                            <i class="fas fa-phone"></i> +1 514 560 9715
+                        </span>
+                        <span class="cv-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:gauravshajepal@gmail.com">gauravshajepal@gmail.com</a>
+                        </span>
+                        <span class="cv-contact-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/gauravshajepal-hash" target="_blank">github.com/gauravshajepal-hash</a>
+                        </span>
+                        <span class="cv-contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://linkedin.com/in/gauravshajepal" target="_blank">linkedin.com/in/gauravshajepal</a>
+                        </span>
                     </div>
-                </object>
+                </div>
+
+                <!-- Professional Experience -->
+                <div class="cv-section">
+                    <div class="cv-section-title">Professional Experience</div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Operations Supervisor (Contract)</span>
+                            <span class="cv-entry-date">Oct 2025 – Dec 2025</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.gategroup.com/" target="_blank">Gate Gourmet Canada Inc.</a> — Montreal, QC</div>
+                        <ul>
+                            <li>Oversaw end-to-end production and dispatch workflows for international flight catering in secure, time-critical setting</li>
+                            <li>Enforced HACCP and security protocols while ensuring SOP consistency across diverse frontline workforce</li>
+                            <li>Served as primary escalation contact for live logistics disruptions, resolving kitchen-to-aircraft discrepancies</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Production Supervisor (Contract)</span>
+                            <span class="cv-entry-date">May 2025 – Jun 2025</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.newrest.eu/" target="_blank">Newrest Travel Retail</a> — Montreal, QC</div>
+                        <ul>
+                            <li>Conducted daily specification checks for technical sheets, product weights, and cold-chain temperatures</li>
+                            <li>Managed traceability records and expiration-date controls to support audit readiness and inventory integrity</li>
+                            <li>Built weekly production plans to improve timing visibility and workflow execution</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Kitchen Manager</span>
+                            <span class="cv-entry-date">Feb 2024 – Jan 2025</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.wecookmeals.ca/" target="_blank">WeCook</a> — Montreal, QC</div>
+                        <ul>
+                            <li>Coordinated cross-department preparation workflows to improve throughput and maintain quality standards</li>
+                            <li>Supervised and coached kitchen team members while reinforcing safety practices and process discipline</li>
+                            <li>Contributed to efficiency initiatives by designing and implementing workflow optimization protocols</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Quality Control Technician</span>
+                            <span class="cv-entry-date">Mar 2023 – Feb 2024</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.wecookmeals.ca/" target="_blank">WeCook</a> — Montreal, QC</div>
+                        <ul>
+                            <li>Executed twice-daily inspections, verified production records, and monitored critical control points (CCPs)</li>
+                            <li>Verified calibration and functionality of thermometers, probes, and scales to maintain measurement reliability</li>
+                            <li>Identified non-conformities and implemented corrective actions aligned with GMP and GHP requirements</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Research Experience -->
+                <div class="cv-section">
+                    <div class="cv-section-title">Research Experience</div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Graduate Research in Systems Biology</span>
+                            <span class="cv-entry-date">May 2021 – Apr 2023</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://iric.umontreal.ca/" target="_blank">IRIC – University of Montreal</a> — Montreal, QC</div>
+                        <ul>
+                            <li>Developed mechanobiology tools and image-analysis workflows to study cancer cell behavior in controlled environments</li>
+                            <li>Applied quantitative methods to improve experimental consistency and interpretability</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Research Intern – Quantitative Analysis</span>
+                            <span class="cv-entry-date">May 2018 – Sep 2018</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.pasteur.fr/" target="_blank">Institut Pasteur</a> — Paris, France</div>
+                        <ul>
+                            <li>Built data-analysis pipeline using LORY, MorphoJ, and PCA for morphometric study of Drosophila wings</li>
+                            <li>Presented results to interdisciplinary research audiences</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Research Intern – Microbiology</span>
+                            <span class="cv-entry-date">Feb 2018 – May 2018</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.cnrs.fr/" target="_blank">CNRS</a> — Paris, France</div>
+                        <ul>
+                            <li>Engineered fluorescent fusion proteins to investigate cellulose secretion mechanisms in bacteria</li>
+                            <li>Performed microbiology assays, fluorescence microscopy, and protein purification workflows</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Research Intern – Systems Biology</span>
+                            <span class="cv-entry-date">Feb 2017 – Jul 2017</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://curie.fr/" target="_blank">Institut Curie</a> — Paris, France</div>
+                        <ul>
+                            <li>Developed and optimized cell enucleation protocols for mechanosensing studies</li>
+                            <li>Improved image-analysis methods for membrane blebbing characterization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Featured Projects -->
+                <div class="cv-section">
+                    <div class="cv-section-title">Featured Projects</div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title"><a href="https://github.com/gauravshajepal-hash/ModelHIV-PH" target="_blank">ModelHIV-PH</a></span>
+                            <span class="cv-entry-date">In Progress</span>
+                        </div>
+                        <ul>
+                            <li>Computational model for HIV epidemic dynamics in the Philippines using epidemiological simulation frameworks</li>
+                            <li>Building tools to analyse transmission patterns, intervention impact, and policy scenarios</li>
+                        </ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title"><a href="https://gauravshajepal-hash.github.io/epigraph-ph/" target="_blank">EpiGraph-PH</a></span>
+                            <span class="cv-entry-date">Completed</span>
+                        </div>
+                        <ul>
+                            <li>Interactive HIV epidemiological dashboard for the Philippines with visualizations of epidemic trends and regional data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="cv-section">
+                    <div class="cv-section-title">Education</div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Graduate Research in Systems Biology</span>
+                            <span class="cv-entry-date">2021 – 2023</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.umontreal.ca/" target="_blank">University of Montreal</a> (IRIC) — Montreal, Canada</div>
+                        <ul><li>Doctoral-level coursework (non-degree). Advanced training in systems biology and quantitative methods.</li></ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">Post-Graduate Specialization in NLP & Data Science</span>
+                            <span class="cv-entry-date">2019</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.univ-lorraine.fr/" target="_blank">University of Lorraine</a> / Institute of Digital Sciences — France</div>
+                        <ul><li>Non-degree coursework focusing on natural language processing and data science methodologies.</li></ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">M.Sc. Interdisciplinary Approaches to Life Sciences</span>
+                            <span class="cv-entry-date">2016 – 2018</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.learningplanetinstitute.org/" target="_blank">Learning Planet Institute</a> (University of Paris) — Paris, France</div>
+                        <ul><li>Two-year specialization program focusing on interdisciplinary research approaches.</li></ul>
+                    </div>
+
+                    <div class="cv-entry">
+                        <div class="cv-entry-header">
+                            <span class="cv-entry-title">B.Tech. in Biotechnology Engineering</span>
+                            <span class="cv-entry-date">2010 – 2014</span>
+                        </div>
+                        <div class="cv-entry-sub"><a href="https://www.nitj.ac.in/" target="_blank">NIT Jalandhar</a> — Jalandhar, India</div>
+                        <ul><li>Bachelor's degree in biotechnology with focus on engineering principles and biological systems.</li></ul>
+                    </div>
+                </div>
+
+                <!-- Core Competencies -->
+                <div class="cv-section">
+                    <div class="cv-section-title">Core Competencies</div>
+                    <div class="cv-skills-grid">
+                        <div class="cv-skill-row">
+                            <span class="cv-skill-label">Operations:</span>
+                            <span class="cv-skill-value">Supervision, Workflow Optimization, Production Planning, SOP Compliance</span>
+                        </div>
+                        <div class="cv-skill-row">
+                            <span class="cv-skill-label">Quality:</span>
+                            <span class="cv-skill-value">HACCP, GMP/GHP, Traceability, Corrective Actions</span>
+                        </div>
+                        <div class="cv-skill-row">
+                            <span class="cv-skill-label">Leadership:</span>
+                            <span class="cv-skill-value">Team Coaching, Cross-functional Coordination, Escalation Management</span>
+                        </div>
+                        <div class="cv-skill-row">
+                            <span class="cv-skill-label">Technical:</span>
+                            <span class="cv-skill-value">Python, Image Analysis, Quantitative Analysis, Statistical Methods</span>
+                        </div>
+                        <div class="cv-skill-row">
+                            <span class="cv-skill-label">Research:</span>
+                            <span class="cv-skill-value">Systems Biology, Mechanobiology, Experimental Design, Data Analysis</span>
+                        </div>
+                        <div class="cv-skill-row">
+                            <span class="cv-skill-label">Languages:</span>
+                            <span class="cv-skill-value">English (Fluent), French (Beginner), Hindi (Native)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="cv-section">
+                    <div class="cv-section-title">Certifications</div>
+                    <div class="cv-entry">
+                        <ul>
+                            <li>Lean Six Sigma</li>
+                            <li>Equities Fundamentals</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Publications -->
+                <div class="cv-section">
+                    <div class="cv-section-title">Publications</div>
+
+                    <div class="cv-pub">
+                        <span class="cv-pub-title">Rigidity percolation and active advection synergize in the actomyosin cortex to drive amoeboid cell motility.</span>
+                        <span class="cv-pub-journal"> Developmental Cell (2024).</span>
+                        Co-author.
+                        <a href="https://doi.org/10.1016/j.devcel.2024.06.023" target="_blank">doi.org/10.1016/j.devcel.2024.06.023</a>
+                    </div>
+
+                    <div class="cv-pub">
+                        <span class="cv-pub-title">Operational Viability of an Integrated Hot Kitchen at Lufa Farms.</span>
+                        <span class="cv-pub-journal"> White Paper (2023).</span>
+                        Independent study. Zenodo record available.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -168,16 +662,6 @@
                     icon.classList.toggle('fa-bars');
                     icon.classList.toggle('fa-times');
                 }
-            });
-        }
-
-        // Check if PDF loaded
-        const embed = document.getElementById('resumeEmbed');
-        const fallback = document.getElementById('resumeFallback');
-        if (embed && fallback) {
-            embed.addEventListener('error', () => {
-                embed.style.display = 'none';
-                fallback.style.display = 'block';
             });
         }
     </script>
