@@ -113,7 +113,7 @@ if (contactForm) {
 }
 
 // Scroll reveal animation with Intersection Observer
-const revealElements = document.querySelectorAll('.timeline-item, .education-card, .skill-category, .publication-item, .project-card, .repo-card');
+const revealElements = document.querySelectorAll('.timeline-item, .education-card, .skill-category, .publication-item, .project-card, .repo-card, .reveal');
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
