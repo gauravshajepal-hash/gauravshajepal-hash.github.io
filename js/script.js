@@ -327,6 +327,25 @@ function initSkillsGraph() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
+    
+    // High DPI support
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    
+    // Skill categories with colors
+    const categories = {
+        operations: { color: '#3b82f6', label: 'Operations' },
+        quality: { color: '#10b981', label: 'Quality' },
+        leadership: { color: '#8b5cf6', label: 'Leadership' },
+        technical: { color: '#f59e0b', label: 'Technical' },
+        research: { color: '#ef4444', label: 'Research' }
+    };
+    
     // Particle background system
     const particles = [];
     const particleCount = 50;
@@ -367,26 +386,8 @@ function initSkillsGraph() {
     tooltip.className = 'skill-tooltip';
     canvas.parentElement.appendChild(tooltip);
     
-    // High DPI support
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-    canvas.style.width = rect.width + 'px';
-    canvas.style.height = rect.height + 'px';
-    
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
-    // Skill categories with colors
-    const categories = {
-        operations: { color: '#3b82f6', label: 'Operations' },
-        quality: { color: '#10b981', label: 'Quality' },
-        leadership: { color: '#8b5cf6', label: 'Leadership' },
-        technical: { color: '#f59e0b', label: 'Technical' },
-        research: { color: '#ef4444', label: 'Research' }
-    };
     
     // Skill nodes
     const nodes = [
