@@ -29,26 +29,6 @@ if (mobileMenuBtn && navLinks) {
     });
 }
 
-// Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const savedTheme = localStorage.getItem('theme');
-
-if (savedTheme) {
-    document.documentElement.setAttribute('data-theme', savedTheme);
-} else if (prefersDark) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-}
-
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-    });
-}
-
 // Navbar scroll effect
 const navbar = document.querySelector('.navbar');
 if (navbar) {
