@@ -343,45 +343,45 @@ function initSkillsGraph() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    // Skill categories with colors
+    // Skill categories with better colors
     const categories = {
-        operations: { color: '#3b82f6', label: 'Operations' },
-        quality: { color: '#10b981', label: 'Quality' },
-        leadership: { color: '#8b5cf6', label: 'Leadership' },
-        technical: { color: '#f59e0b', label: 'Technical' },
-        research: { color: '#ef4444', label: 'Research' }
+        operations: { color: '#2563eb', bg: '#dbeafe', label: 'Operations' },
+        quality: { color: '#059669', bg: '#d1fae5', label: 'Quality' },
+        leadership: { color: '#7c3aed', bg: '#ede9fe', label: 'Leadership' },
+        technical: { color: '#d97706', bg: '#fef3c7', label: 'Technical' },
+        research: { color: '#dc2626', bg: '#fee2e2', label: 'Research' }
     };
     
-    // Skill nodes
+    // Skill nodes with better sizing
     const nodes = [
         // Operations
-        { id: 'production', label: 'Production\nSupervision', category: 'operations', size: 28, x: centerX - 200, y: centerY - 100 },
-        { id: 'workflow', label: 'Workflow\nOptimization', category: 'operations', size: 24, x: centerX - 150, y: centerY + 50 },
-        { id: 'sop', label: 'SOP\nCompliance', category: 'operations', size: 22, x: centerX - 280, y: centerY },
-        { id: 'planning', label: 'Production\nPlanning', category: 'operations', size: 22, x: centerX - 180, y: centerY - 200 },
+        { id: 'production', label: 'Production Supervision', category: 'operations', size: 45, x: centerX - 250, y: centerY - 80 },
+        { id: 'workflow', label: 'Workflow Optimization', category: 'operations', size: 40, x: centerX - 120, y: centerY + 60 },
+        { id: 'sop', label: 'SOP Compliance', category: 'operations', size: 35, x: centerX - 320, y: centerY + 20 },
+        { id: 'planning', label: 'Production Planning', category: 'operations', size: 38, x: centerX - 200, y: centerY - 200 },
         
         // Quality
-        { id: 'haccp', label: 'HACCP', category: 'quality', size: 30, x: centerX + 50, y: centerY - 150 },
-        { id: 'gmp', label: 'GMP/GHP', category: 'quality', size: 24, x: centerX + 150, y: centerY - 50 },
-        { id: 'traceability', label: 'Traceability', category: 'quality', size: 22, x: centerX + 100, y: centerY - 250 },
-        { id: 'documentation', label: 'Documentation', category: 'quality', size: 22, x: centerX + 200, y: centerY - 180 },
+        { id: 'haccp', label: 'HACCP', category: 'quality', size: 48, x: centerX + 80, y: centerY - 130 },
+        { id: 'gmp', label: 'GMP/GHP', category: 'quality', size: 40, x: centerX + 200, y: centerY - 30 },
+        { id: 'traceability', label: 'Traceability', category: 'quality', size: 35, x: centerX + 140, y: centerY - 260 },
+        { id: 'documentation', label: 'Documentation', category: 'quality', size: 35, x: centerX + 280, y: centerY - 160 },
         
         // Leadership
-        { id: 'team', label: 'Team\nDevelopment', category: 'leadership', size: 24, x: centerX - 100, y: centerY + 150 },
-        { id: 'stakeholder', label: 'Stakeholder\nComm.', category: 'leadership', size: 22, x: centerX + 50, y: centerY + 200 },
-        { id: 'coaching', label: 'Coaching', category: 'leadership', size: 20, x: centerX - 200, y: centerY + 180 },
+        { id: 'team', label: 'Team Development', category: 'leadership', size: 40, x: centerX - 80, y: centerY + 180 },
+        { id: 'stakeholder', label: 'Stakeholder Comm.', category: 'leadership', size: 36, x: centerX + 80, y: centerY + 230 },
+        { id: 'coaching', label: 'Coaching', category: 'leadership', size: 32, x: centerX - 220, y: centerY + 200 },
         
         // Technical
-        { id: 'python', label: 'Python', category: 'technical', size: 26, x: centerX + 250, y: centerY + 50 },
-        { id: 'data', label: 'Data\nAnalysis', category: 'technical', size: 24, x: centerX + 180, y: centerY + 120 },
-        { id: 'statistics', label: 'Statistical\nMethods', category: 'technical', size: 22, x: centerX + 300, y: centerY - 50 },
-        { id: 'sql', label: 'SQL', category: 'technical', size: 18, x: centerX + 320, y: centerY + 100 },
+        { id: 'python', label: 'Python', category: 'technical', size: 44, x: centerX + 300, y: centerY + 80 },
+        { id: 'data', label: 'Data Analysis', category: 'technical', size: 40, x: centerX + 220, y: centerY + 160 },
+        { id: 'statistics', label: 'Statistical Methods', category: 'technical', size: 38, x: centerX + 360, y: centerY - 30 },
+        { id: 'sql', label: 'SQL', category: 'technical', size: 30, x: centerX + 380, y: centerY + 130 },
         
         // Research
-        { id: 'biology', label: 'Systems\nBiology', category: 'research', size: 26, x: centerX - 50, y: centerY - 250 },
-        { id: 'imaging', label: 'Image\nProcessing', category: 'research', size: 22, x: centerX + 150, y: centerY - 300 },
-        { id: 'quantitative', label: 'Quantitative\nAnalysis', category: 'research', size: 24, x: centerX - 150, y: centerY - 280 },
-        { id: 'experimental', label: 'Experimental\nDesign', category: 'research', size: 22, x: centerX - 50, y: centerY - 350 }
+        { id: 'biology', label: 'Systems Biology', category: 'research', size: 44, x: centerX - 30, y: centerY - 260 },
+        { id: 'imaging', label: 'Image Processing', category: 'research', size: 36, x: centerX + 180, y: centerY - 330 },
+        { id: 'quantitative', label: 'Quantitative Analysis', category: 'research', size: 40, x: centerX - 180, y: centerY - 310 },
+        { id: 'experimental', label: 'Experimental Design', category: 'research', size: 36, x: centerX - 60, y: centerY - 380 }
     ];
     
     // Connections between skills (skill transfer relationships)
@@ -442,10 +442,10 @@ function initSkillsGraph() {
     });
     
     function applyForces() {
-        const repulsion = 5000;
-        const attraction = 0.005;
+        const repulsion = 8000;
+        const attraction = 0.003;
         const damping = 0.85;
-        const centerGravity = 0.001;
+        const centerGravity = 0.0008;
         
         // Repulsion between nodes
         for (let i = 0; i < nodes.length; i++) {
@@ -511,7 +511,7 @@ function initSkillsGraph() {
             node.y += node.vy;
             
             // Boundary constraints
-            const margin = 50;
+            const margin = 60;
             node.x = Math.max(margin, Math.min(rect.width - margin, node.x));
             node.y = Math.max(margin, Math.min(rect.height - margin, node.y));
         });
@@ -527,14 +527,14 @@ function initSkillsGraph() {
             if (!from || !to) return;
             
             const gradient = ctx.createLinearGradient(from.x, from.y, to.x, to.y);
-            gradient.addColorStop(0, categories[from.category].color + '40');
-            gradient.addColorStop(1, categories[to.category].color + '40');
+            gradient.addColorStop(0, categories[from.category].color + '50');
+            gradient.addColorStop(1, categories[to.category].color + '50');
             
             ctx.beginPath();
             ctx.moveTo(from.x, from.y);
             ctx.lineTo(to.x, to.y);
             ctx.strokeStyle = gradient;
-            ctx.lineWidth = conn.strength * 2;
+            ctx.lineWidth = conn.strength * 3;
             ctx.stroke();
         });
         
@@ -543,37 +543,80 @@ function initSkillsGraph() {
             const cat = categories[node.category];
             const isHovered = isMouseOverNode(node);
             
-            // Glow effect
+            // Glow effect on hover
             if (isHovered) {
                 ctx.beginPath();
-                ctx.arc(node.x, node.y, node.size + 10, 0, Math.PI * 2);
-                ctx.fillStyle = cat.color + '20';
+                ctx.arc(node.x, node.y, node.size + 15, 0, Math.PI * 2);
+                ctx.fillStyle = cat.color + '15';
                 ctx.fill();
             }
             
-            // Node circle
+            // Node shadow
+            ctx.beginPath();
+            ctx.arc(node.x, node.y + 3, node.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fill();
+            
+            // Node circle with gradient
+            const gradient = ctx.createRadialGradient(
+                node.x - node.size * 0.3, 
+                node.y - node.size * 0.3, 
+                0, 
+                node.x, 
+                node.y, 
+                node.size
+            );
+            gradient.addColorStop(0, lightenColor(cat.color, 20));
+            gradient.addColorStop(1, cat.color);
+            
             ctx.beginPath();
             ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
-            ctx.fillStyle = isHovered ? cat.color : cat.color + 'CC';
+            ctx.fillStyle = isHovered ? cat.color : gradient;
             ctx.fill();
-            ctx.strokeStyle = cat.color;
-            ctx.lineWidth = 2;
+            
+            // Node border
+            ctx.strokeStyle = isHovered ? '#ffffff' : cat.color + '80';
+            ctx.lineWidth = isHovered ? 3 : 2;
             ctx.stroke();
             
-            // Node label
+            // Node label - word wrap
             ctx.fillStyle = '#ffffff';
-            ctx.font = `bold ${Math.max(10, node.size * 0.45)}px Inter, sans-serif`;
+            ctx.font = `600 ${Math.max(11, node.size * 0.3)}px Inter, -apple-system, sans-serif`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             
-            const lines = node.label.split('\n');
-            const lineHeight = node.size * 0.5;
+            const words = node.label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            
+            words.forEach(word => {
+                const testLine = currentLine ? currentLine + ' ' + word : word;
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > node.size * 1.6 && currentLine) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = testLine;
+                }
+            });
+            if (currentLine) lines.push(currentLine);
+            
+            const lineHeight = node.size * 0.35;
             const startY = node.y - ((lines.length - 1) * lineHeight) / 2;
             
             lines.forEach((line, i) => {
                 ctx.fillText(line, node.x, startY + i * lineHeight);
             });
         });
+    }
+    
+    function lightenColor(percent, color) {
+        const num = parseInt(color.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.min(255, (num >> 16) + amt);
+        const G = Math.min(255, (num >> 8 & 0x00FF) + amt);
+        const B = Math.min(255, (num & 0x0000FF) + amt);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
     }
     
     function isMouseOverNode(node) {
@@ -608,8 +651,8 @@ function initSkillsGraph() {
         if (hoveredNode) {
             const cat = categories[hoveredNode.category];
             tooltip.innerHTML = `
-                <div class="tooltip-category">${cat.label}</div>
-                <h4>${hoveredNode.label.replace('\n', ' ')}</h4>
+                <div class="tooltip-category" style="color: ${cat.color}">${cat.label}</div>
+                <h4>${hoveredNode.label}</h4>
             `;
             tooltip.style.left = (mouseX + 15) + 'px';
             tooltip.style.top = (mouseY - 10) + 'px';
