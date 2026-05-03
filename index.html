@@ -488,192 +488,30 @@
             <div class="section-header reveal">
                 <span class="section-label">Expertise</span>
                 <h2 class="section-title">Core Competencies</h2>
+                <p class="section-subtitle">Interactive skill network — drag nodes to explore connections</p>
             </div>
-            <div class="skills-container reveal">
-                <div class="skill-group">
-                    <div class="skill-category-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-industry"></i>
-                        </div>
-                        <h3>Operations & Production</h3>
+            <div class="skills-graph-container reveal">
+                <canvas id="skillsGraph" width="1000" height="600"></canvas>
+                <div class="skill-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background: #3b82f6"></span>
+                        <span>Operations</span>
                     </div>
-                    <div class="skill-bars">
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Production Supervision</span>
-                                <span>Expert</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Workflow Optimization</span>
-                                <span>Expert</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="90"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Process Coordination</span>
-                                <span>Advanced</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="88"></div></div>
-                        </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background: #10b981"></span>
+                        <span>Quality</span>
                     </div>
-                </div>
-                <div class="skill-group">
-                    <div class="skill-category-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <h3>Quality Management</h3>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background: #8b5cf6"></span>
+                        <span>Leadership</span>
                     </div>
-                    <div class="skill-bars">
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>HACCP Compliance</span>
-                                <span>Expert</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="98"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Documentation</span>
-                                <span>Expert</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Traceability</span>
-                                <span>Expert</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="92"></div></div>
-                        </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background: #f59e0b"></span>
+                        <span>Technical</span>
                     </div>
-                </div>
-                <div class="skill-group">
-                    <div class="skill-category-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Leadership</h3>
-                    </div>
-                    <div class="skill-bars">
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Team Development</span>
-                                <span>Advanced</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Conflict Resolution</span>
-                                <span>Advanced</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="88"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Stakeholder Comm.</span>
-                                <span>Expert</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="90"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group">
-                    <div class="skill-category-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <h3>Technical</h3>
-                    </div>
-                    <div class="skill-bars">
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Data Analysis</span>
-                                <span>Advanced</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Statistical Modeling</span>
-                                <span>Intermediate</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="80"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Python & R</span>
-                                <span>Intermediate</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="75"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group">
-                    <div class="skill-category-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-vial"></i>
-                        </div>
-                        <h3>Research Methods</h3>
-                    </div>
-                    <div class="skill-bars">
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Systems Biology</span>
-                                <span>Expert</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="92"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Image Processing</span>
-                                <span>Advanced</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Quantitative Analysis</span>
-                                <span>Expert</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="90"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group">
-                    <div class="skill-category-header">
-                        <div class="skill-icon">
-                            <i class="fas fa-globe"></i>
-                        </div>
-                        <h3>Languages</h3>
-                    </div>
-                    <div class="skill-bars">
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>English</span>
-                                <span>Fluent</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="100"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>French</span>
-                                <span>Beginner</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="30"></div></div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-bar-header">
-                                <span>Hindi</span>
-                                <span>Native</span>
-                            </div>
-                            <div class="bar-track"><div class="bar-fill" data-width="100"></div></div>
-                        </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background: #ef4444"></span>
+                        <span>Research</span>
                     </div>
                 </div>
             </div>
