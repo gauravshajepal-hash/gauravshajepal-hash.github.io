@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gaurav Shajepal - Resume / CV">
+    <title>Resume - Gaurav Shajepal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>GS</text></svg>">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .resume-page {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .resume-header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .resume-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .resume-container {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .resume-embed {
+            width: 100%;
+            height: calc(100vh - 220px);
+            min-height: 600px;
+            border: none;
+            display: block;
+        }
+
+        .resume-fallback {
+            display: none;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .resume-fallback i {
+            font-size: 3rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .resume-fallback p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .resume-embed {
+                height: calc(100vh - 180px);
+                min-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-brand">Gaurav Shajepal</a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#experience" class="nav-link">Experience</a>
+                <a href="index.html#research" class="nav-link">Research</a>
+                <a href="index.html#projects" class="nav-link">Projects</a>
+                <a href="index.html#education" class="nav-link">Education</a>
+                <a href="index.html#skills" class="nav-link">Skills</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <a href="resume.html" class="nav-link active">
+                    <i class="fas fa-file-alt"></i> Resume
+                </a>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Resume Section -->
+    <section class="resume-page">
+        <div class="container">
+            <div class="resume-header">
+                <h1><i class="fas fa-file-alt" style="color:var(--accent-primary);margin-right:0.5rem;"></i> Resume</h1>
+                <div class="resume-actions">
+                    <a href="My_CV.pdf" download="Gaurav_Shajepal_CV.pdf" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                    <a href="My_CV.pdf" target="_blank" class="btn btn-secondary">
+                        <i class="fas fa-external-link-alt"></i> Open in New Tab
+                    </a>
+                </div>
+            </div>
+            <div class="resume-container">
+                <object data="My_CV.pdf" type="application/pdf" class="resume-embed" id="resumeEmbed">
+                    <div class="resume-fallback" id="resumeFallback">
+                        <i class="fas fa-file-pdf"></i>
+                        <p>Your browser doesn't support PDF preview.</p>
+                        <a href="My_CV.pdf" download="Gaurav_Shajepal_CV.pdf" class="btn btn-primary">
+                            <i class="fas fa-download"></i> Download PDF Instead
+                        </a>
+                    </div>
+                </object>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        } else if (prefersDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+        }
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+        }
+
+        // Check if PDF loaded
+        const embed = document.getElementById('resumeEmbed');
+        const fallback = document.getElementById('resumeFallback');
+        if (embed && fallback) {
+            embed.addEventListener('error', () => {
+                embed.style.display = 'none';
+                fallback.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
