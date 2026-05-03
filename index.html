@@ -20,6 +20,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Floating Decorations -->
+    <div class="floating-shapes">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -32,13 +40,22 @@
                 <a href="#education" class="nav-link">Education</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#contact" class="nav-link">Contact</a>
+                <a href="https://github.com/gauravshajepal-hash" target="_blank" class="nav-link">
+                    <i class="fab fa-github"></i>
+                </a>
                 <a href="My_CV.pdf" class="nav-link" download="My_CV.pdf">
                     <i class="fas fa-file-pdf"></i> Resume
                 </a>
             </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -52,7 +69,7 @@
                     </h1>
                     <div class="hero-badge">Available for Opportunities</div>
                     <h2 class="hero-subtitle">
-                        Systems Biology & Production Management
+                        <span class="typing-text" id="typingText"></span><span class="typing-cursor"></span>
                     </h2>
                     <p class="hero-description">
                         Experienced professional with expertise in operations supervision, quality control, and systems biology research. 
@@ -317,6 +334,28 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Repos Section -->
+    <section id="repos" class="section bg-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">GitHub</span>
+                <h2 class="section-title">Open Source Work</h2>
+                <p class="section-subtitle">Latest repositories from GitHub</p>
+            </div>
+            <div class="repos-grid" id="reposGrid">
+                <div class="repo-loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading repositories...</p>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:2rem;">
+                <a href="https://github.com/gauravshajepal-hash" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> View All on GitHub
+                </a>
             </div>
         </div>
     </section>
