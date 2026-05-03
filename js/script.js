@@ -327,6 +327,42 @@ function initSkillsGraph() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
+    // Particle background system
+    const particles = [];
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * rect.width,
+            y: Math.random() * rect.height,
+            radius: Math.random() * 2 + 0.5,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            alpha: Math.random() * 0.3 + 0.1,
+            category: Object.keys(categories)[Math.floor(Math.random() * Object.keys(categories).length)]
+        });
+    }
+    
+    function updateParticles() {
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            
+            if (p.x < 0 || p.x > rect.width) p.vx *= -1;
+            if (p.y < 0 || p.y > rect.height) p.vy *= -1;
+        });
+    }
+    
+    function drawParticles() {
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            const cat = categories[p.category];
+            ctx.fillStyle = cat.color + Math.floor(p.alpha * 255).toString(16).padStart(2, '0');
+            ctx.fill();
+        });
+    }
+    
     const tooltip = document.createElement('div');
     tooltip.className = 'skill-tooltip';
     canvas.parentElement.appendChild(tooltip);
@@ -518,6 +554,8 @@ function initSkillsGraph() {
     }
     
     function draw() {
+        // Draw particles
+        drawParticles();
         ctx.clearRect(0, 0, rect.width, rect.height);
         
         // Draw connections
@@ -585,6 +623,7 @@ function initSkillsGraph() {
     function animate() {
         if (isSimulating) {
             applyForces();
+            updateParticles();
         }
         draw();
         animationId = requestAnimationFrame(animate);
