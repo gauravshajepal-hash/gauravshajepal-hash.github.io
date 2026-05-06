@@ -533,3 +533,75 @@ function initSkillsGraph() {
     // Initialize skills graph when DOM is ready
     document.addEventListener('DOMContentLoaded', initSkillsGraph);
 
+
+// ==================== SCROLL PROGRESS BAR ====================
+(function() {
+    var bar = document.createElement('div');
+    bar.className = 'scroll-progress-fill';
+    var container = document.getElementById('scrollProgress');
+    if (container) container.appendChild(bar);
+
+    function updateProgress() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = progress + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+})();
+
+// ==================== BACK TO TOP ====================
+(function() {
+    var btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
+
+// ==================== SCROLL PROGRESS BAR ====================
+(function() {
+    var bar = document.createElement('div');
+    bar.className = 'scroll-progress-fill';
+    var container = document.getElementById('scrollProgress');
+    if (container) container.appendChild(bar);
+
+    function updateProgress() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = progress + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+})();
+
+// ==================== BACK TO TOP ====================
+(function() {
+    var btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
